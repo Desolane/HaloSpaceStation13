@@ -9,6 +9,16 @@
 	throwpass = 1
 	var/health = 50
 
+/obj/structure/barricadeunsc
+	name = "Barricade"
+	icon = 'code/modules/halo/icons/machinery/structures.dmi'
+	icon_state = "barricade"
+	density = 1
+	anchored = 1
+	flags = ON_BORDER
+	throwpass = 1
+	var/health = 100
+
 /obj/structure/sandbag/New()
 	..()
 	if(dir == 2)
@@ -172,9 +182,16 @@
 			user.visible_message("<span class='notice'>[user] starts filling [src]...</span>",\
 				"<span class='notice'>You start filling [src]...</span>")
 			if(do_after(user,50))
-				var/obj/structure/sandbag/S = new(src.loc)
+				var/loc_dropon = get_turf(src)
+				if(src.loc == user)
+					loc_dropon = get_turf(user)
+				var/obj/structure/sandbag/S = new(loc_dropon)
 				S.dir = src.dir
+				if(src.loc == user)
+					S.dir = user.dir
 				user.remove_from_mob(I)
+				if(src.loc == user)
+					user.remove_from_mob(src)
 				qdel(I)
 				qdel(src)
 	else

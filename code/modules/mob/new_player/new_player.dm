@@ -285,7 +285,7 @@
 /mob/new_player/proc/IsJobAvailable(var/datum/job/job)
 	if(!job)	return 0
 	if(!job.is_position_available()) return 0
-	if(jobban_isbanned(src, job.title))	return 0
+	if(jobban_isbanned(src, job.title,job.is_whitelisted, job))	return 0
 	if(!job.player_old_enough(src.client))	return 0
 
 	return 1
@@ -314,7 +314,7 @@
 	if(job.is_restricted(client.prefs, src))
 		return
 
-	var/datum/spawnpoint/spawnpoint = job_master.get_spawnpoint_for(client, job.title)
+	var/datum/spawnpoint/spawnpoint = job_master.get_spawnpoint_for(client, job)
 	var/turf/spawn_turf = pick(spawnpoint.turfs)
 	if(job.latejoin_at_spawnpoints)
 		var/obj/S = job_master.get_roundstart_spawnpoint(job.title)
@@ -337,7 +337,7 @@
 
 	job_master.AssignRole(src, job.title, 1)
 
-	var/mob/living/character = create_character(spawn_turf)	//creates the human and transfers vars and mind
+	var/mob/living/character = create_character(spawn_turf, job)	//creates the human and transfers vars and mind
 	if(!character)
 		return 0
 
@@ -371,10 +371,10 @@
 		if(character.mind.assigned_role != "Cyborg")
 			GLOB.data_core.manifest_inject(character)
 			ticker.minds += character.mind//Cyborgs and AIs handle this in the transform proc.	//TODO!!!!! ~Carn
-			AnnounceArrival(character, job, spawnpoint.msg)
 		else
 			AnnounceCyborg(character, job, spawnpoint.msg)
 		matchmaker.do_matchmaking()
+	AnnounceArrival(character, job, spawnpoint.msg)
 	log_and_message_admins("has joined the round as [character.mind.assigned_role].", character)
 	qdel(src)
 
@@ -421,9 +421,17 @@
 	dat += "</center>"
 	src << browse(jointext(dat, null), "window=latechoices;size=300x640;can_close=1")
 
-/mob/new_player/proc/create_character(var/turf/spawn_turf)
+/mob/new_player/proc/create_character(var/turf/spawn_turf, var/datum/job/job_datum)
 	spawning = 1
 	close_spawn_windows()
+
+	//check if we are an assigned antagonist and dont need a body spawned for us here
+	var/datum/antagonist/antag = player_is_antag(src.mind)
+	if(antag && antag.flags & ANTAG_OVERRIDE_JOB)
+		return
+
+	if(!job_datum)
+		job_datum = job_master.GetJob(src.mind.assigned_role)
 
 	var/mob/living/carbon/human/new_character
 
@@ -432,7 +440,7 @@
 		chosen_species = all_species[client.prefs.species]
 
 	if(!spawn_turf)
-		var/datum/spawnpoint/spawnpoint = job_master.get_spawnpoint_for(client, get_rank_pref())
+		var/datum/spawnpoint/spawnpoint = job_master.get_spawnpoint_for(client, job_datum)//get_rank_pref())
 		spawn_turf = pick(spawnpoint.turfs)
 
 	if(chosen_species)
@@ -455,7 +463,7 @@
 
 	if(ticker.random_players)
 		new_character.gender = pick(MALE, FEMALE)
-		client.prefs.real_name = random_name(new_character.gender)
+		client.prefs.real_name = random_name(new_character.gender, new_character.species.name)
 		client.prefs.randomize_appearance_and_body_for(new_character)
 	else
 		client.prefs.copy_to(new_character)

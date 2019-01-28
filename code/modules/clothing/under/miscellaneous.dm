@@ -520,8 +520,8 @@
 	starting_accessories = list(/obj/item/clothing/accessory/yellow, /obj/item/clothing/accessory/toggleable/tan_jacket)
 
 /obj/item/clothing/under/suit_jacket/nt
-	name = "\improper NanoTrasen executive suit"
-	desc = "A suit that NanoTrasen gives to its executives."
+	name = "\improper Misriah Armory executive suit"
+	desc = "A suit that Misriah Armory gives to its executives."
 	icon_state = "ntsuit"
 	item_state = "bl_suit"
 	worn_state = "ntsuit"
@@ -573,8 +573,8 @@
 	worn_state = "pcrc"
 
 /obj/item/clothing/under/grayson
-	name = "\improper Grayson overalls"
-	desc = "A set of overalls belonging to Grayson Manufactories, a mining Trans-Stellar."
+	name = "\improper mining overalls"
+	desc = "A set of overalls belonging a mining corporation."
 	icon_state = "grayson"
 	worn_state = "grayson"
 
@@ -609,14 +609,14 @@
 	worn_state = "frontier"
 
 /obj/item/clothing/under/aether
-	name = "\improper Aether jumpsuit"
-	desc = "A jumpsuit belonging to Aether Atmospherics and Recycling, a Trans-Stellar that supplies recycling and atmospheric systems to colonies."
+	name = "\improper recycling clothes"
+	desc = "An outfit belonging to a corporation that supplies recycling systems to colonies."
 	icon_state = "aether"
 	worn_state = "aether"
 
 /obj/item/clothing/under/focal
-	name = "\improper Focal Point jumpsuit"
-	desc = "A jumpsuit belonging to Focal Point Energistics, an engineering megacorporation."
+	name = "\improper engineering jumpsuit"
+	desc = "An outfit belonging to an engineering corporation."
 	icon_state = "focal"
 	worn_state = "focal"
 

@@ -123,7 +123,17 @@
 	return
 
 //This proc should never be overridden elsewhere at /atom/movable to keep directions sane.
-/atom/movable/Move(newloc, direct)
+/atom/movable/Move(var/turf/newloc , direct)
+	if(newloc.density == 0) //No need to deal with elevation if there's a wall in the way. This also fixes projectiles phasing through walls.
+		var/list/changed_atoms = list() //Used to track the atoms we've changed the density of, to allow for a later revert.
+		for(var/atom/movable/AM in newloc.contents)
+			if(AM.elevation != src.elevation && AM.density != 0)
+				changed_atoms.Add(AM)
+				AM.density = 0
+		spawn(1)//Delay for a very short time.
+			for(var/atom/movable/AM in changed_atoms)
+				AM.density = 1 //Reset the changed atoms
+
 	if (direct & (direct - 1))
 		if (direct & 1)
 			if (direct & 4)
@@ -213,11 +223,6 @@
 	if(Process_Grab())	return
 
 	if(!mob.canmove)
-		return
-
-	if(mob.driving)
-		mob.driving.relaymove(n,direct)
-		move_delay = world.time + mob.driving.vehicle_move_delay
 		return
 
 	if(isliving(mob))
@@ -430,7 +435,8 @@
 
 	if(!lastarea)
 		lastarea = get_area(loc)
-	if(!lastarea.has_gravity)
+	var/area/curarea = get_area(loc)
+	if(!curarea.has_gravity)
 		return 0
 
 	return 1

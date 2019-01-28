@@ -105,7 +105,7 @@ var/global/datum/controller/occupations/job_master
 				unassigned -= player
 				job.current_positions++
 				if(job.track_players)
-					job.assigned_players.Add(player)
+					job.assigned_players.Add(player.mind)
 				return 1
 		Debug("AR has failed, Player: [player], Rank: [rank]")
 		return 0
@@ -121,7 +121,7 @@ var/global/datum/controller/occupations/job_master
 		Debug("Running FOC, Job: [job], Level: [level], Flag: [flag]")
 		var/list/candidates = list()
 		for(var/mob/new_player/player in unassigned)
-			if(jobban_isbanned(player, job.title))
+			if(jobban_isbanned(player, job.title, job))
 				Debug("FOC isbanned failed, Player: [player]")
 				continue
 			if(!job.player_old_enough(player.client))
@@ -301,7 +301,7 @@ var/global/datum/controller/occupations/job_master
 					if(!job || ticker.mode.disabled_jobs.Find(job.title) )
 						continue
 
-					if(jobban_isbanned(player, job.title))
+					if(jobban_isbanned(player, job.title,job.is_whitelisted))
 						Debug("DO isbanned failed, Player: [player], Job:[job.title]")
 						continue
 
@@ -620,14 +620,25 @@ var/global/datum/controller/occupations/job_master
  *  preference is not set, or the preference is not appropriate for the rank, in
  *  which case a fallback will be selected.
  */
-/datum/controller/occupations/proc/get_spawnpoint_for(var/client/C, var/rank)
+/datum/controller/occupations/proc/get_spawnpoint_for(var/client/C, var/datum/job/job_datum)
 
 	if(!C)
 		CRASH("Null client passed to get_spawnpoint_for() proc!")
+	if(!istype(job_datum))
+		CRASH("Incorrect job typepassed to get_spawnpoint_for() proc for [C]! Recieved \'[job_datum]\' but expected /datum/job/")
 
+	var/rank = job_datum.title
 	var/mob/H = C.mob
 	var/spawnpoint = C.prefs.spawnpoint
 	var/datum/spawnpoint/spawnpos
+
+	if(job_datum.spawnpoint_override)
+		to_chat(H,"<span class = 'notice'>Job has spawnpoint override set. Ignoring preference-set spawnpoint.</span>")
+		var/datum/spawnpoint/candidate = spawntypes()[job_datum.spawnpoint_override]
+		if(isnull(candidate))
+			to_chat(H,"<span class = 'warning'>ERROR: Spawnpoint override set, yet spawnpoint not allowed on current map!</span>")
+		if(candidate.check_job_spawning(rank))
+			return candidate
 
 	if(spawnpoint == DEFAULT_SPAWNPOINT_ID)
 		spawnpoint = GLOB.using_map.default_spawn

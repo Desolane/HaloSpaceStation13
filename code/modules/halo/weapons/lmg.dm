@@ -18,8 +18,9 @@
 	reload_sound = 'code/modules/halo/sounds/UNSC_Saw_Reload_Sound_Effect.ogg'
 	one_hand_penalty = -1
 	burst = 5
-	burst_delay = 3
-
+	burst_delay = 0.5
+	fire_delay = 2
+	w_class = ITEM_SIZE_HUGE
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
@@ -35,3 +36,4 @@
 		icon_state = "M739"
 	else
 		icon_state = "M739_unloaded"
+	. = ..()

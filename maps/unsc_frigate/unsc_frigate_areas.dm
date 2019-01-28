@@ -16,11 +16,12 @@
 		/area/unscfrigate/logistics/hangar_aftport = NO_SCRUBBER,
 		/area/unscfrigate/logistics/hangar_foreport = NO_SCRUBBER,
 		/area/unscfrigate/hangar_starb = NO_SCRUBBER,
-		/area/unscfrigate/central = NO_SCRUBBER,
+		/area/unscfrigate/central = NO_SCRUBBER|NO_VENT,
 		/area/unscfrigate/hangar_port = NO_SCRUBBER,
 		/area/unscfrigate/tcomms = NO_SCRUBBER,
 		/area/unscfrigate/bridge = NO_SCRUBBER,
-		/area/unscfrigate/mac/cannon = NO_SCRUBBER|NO_VENT|NO_APC
+		/area/unscfrigate/mac/cannon = NO_SCRUBBER|NO_VENT,
+		/area/turbolift = NO_SCRUBBER|NO_VENT|NO_APC
 	)
 //Top Deck
 
@@ -288,3 +289,22 @@
 /area/unscfrigate/garage_4
 	name = "Primary Vehicle Garage"
 	icon_state = "garage"
+
+/area/unscfrigate/odstcountry
+	name = "ODST Country"
+	icon_state = "marine"
+
+/area/unscfrigate/portguns
+	name = "Port weapon emplacement"
+
+/area/unscfrigate/starboardguns
+	name = "Starboard weapon emplacement"
+
+
+//Overmap Weapon Console Defines//
+
+/obj/machinery/overmap_weapon_console/deck_gun_control/local/frigate
+	deck_gun_area = /area/unscfrigate/portguns
+
+/obj/machinery/overmap_weapon_console/deck_gun_control/local/missile_control/frigate
+	deck_gun_area = /area/unscfrigate/starboardguns

@@ -34,7 +34,7 @@ var/global/datum/dropship_landing_controller/dropship_landing_controller = new /
 /datum/dropship_landing_controller/proc/get_potential_landing_points(var/check_active = 1,var/check_occupied = 1,var/faction_check)
 	var/list/potential_landing_points = land_points.Copy()
 	if(faction_check)
-		potential_landing_points &= (get_faction_land_points(faction_check,check_active,check_occupied) + get_faction_land_points("civillian",check_active,check_occupied))
+		potential_landing_points &= (get_faction_land_points(faction_check,check_active,check_occupied) + get_faction_land_points("Civilian",check_active,check_occupied))
 	else
 		if(check_active)
 			potential_landing_points &= get_active_land_points()
@@ -59,21 +59,3 @@ var/global/datum/dropship_landing_controller/dropship_landing_controller = new /
 
 /datum/dropship_landing_controller/proc/remove_land_point(var/obj/land_point)
 	land_points -= land_point
-
-/obj/effect/landmark/dropship_land_point
-	name = "Dropship Land Point"
-	var/faction = "civillian"//The faction this landing point belongs to. Null for all-factions.
-	var/active = 1 //Is this landing point available.
-	var/occupied = 0 //Is this landing point currently occupied?
-
-/obj/effect/landmark/dropship_land_point/New()
-	..()
-	dropship_landing_controller.add_land_point(src)
-
-/obj/effect/landmark/dropship_land_point/inactive
-	name = "Inactive Dropship Land Point"
-	active = 0
-
-/obj/effect/landmark/dropship_land_point/occupied
-	name = "Occupied Dropship Land Point"
-	occupied = 1

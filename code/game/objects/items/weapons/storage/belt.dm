@@ -59,9 +59,22 @@
 		/obj/item/weapon/material/hatchet,
 		/obj/item/device/analyzer/plant_analyzer,
 		/obj/item/taperoll,
-		/obj/item/weapon/extinguisher/mini
+		/obj/item/weapon/extinguisher/mini,
+		/obj/item/clothing/gloves/insulated
 		)
 
+/obj/item/weapon/storage/belt/utility/innie
+	name = "door hacking belt"
+
+/obj/item/weapon/storage/belt/utility/innie/New()
+	..()
+	new /obj/item/weapon/screwdriver(src)
+	new /obj/item/weapon/crowbar(src)
+	new /obj/item/weapon/wirecutters(src)
+	new /obj/item/device/multitool(src)
+	new /obj/item/clothing/gloves/insulated(src)
+	new /obj/item/device/multitool/hacktool(src)
+	new /obj/item/device/multitool/hacktool(src)
 
 /obj/item/weapon/storage/belt/utility/full/New()
 	..()
@@ -109,8 +122,8 @@
 		/obj/item/weapon/crowbar,
 		/obj/item/device/flashlight,
 		/obj/item/taperoll,
-		/obj/item/weapon/extinguisher/mini
-		)
+		/obj/item/weapon/extinguisher/mini,
+		/obj/item/weapon/storage/firstaid/unsc)
 
 /obj/item/weapon/storage/belt/medical/emt
 	name = "EMT utility belt"

@@ -8,13 +8,28 @@ var/list/whitelist = list()
 	return 1
 
 /proc/load_whitelist()
-	whitelist = file2list(WHITELISTFILE)
-	if(!whitelist.len)	whitelist = null
+	var/list/whitelist_base = file2list(WHITELISTFILE)
+	if(!whitelist_base.len)	whitelist = null
+	whitelist = list()
+	for(var/value in whitelist_base) //Added some code to handle jobs.
+		if(isnull(value) || value == "" || value == " ")
+			continue
+		var/name_and_job = splittext(value,"=")
+		if(isnull(name_and_job) || name_and_job[1] == value)
+			whitelist += value
+		else
+			whitelist[name_and_job[1]] += list(name_and_job[2])
 
-/proc/check_whitelist(mob/M /*, var/rank*/)
+/proc/check_whitelist(mob/M , var/rank)
 	if(!whitelist)
 		return 0
-	return ("[M.ckey]" in whitelist)
+	if(isnull(rank))
+		return ("[M.ckey]" in whitelist)
+	else
+		for(var/value in whitelist)
+			if(lowertext(value) == "[M.ckey]" && "[rank]" in whitelist[value])
+				return 1
+	return 0
 
 /var/list/alien_whitelist = list()
 
@@ -40,6 +55,7 @@ var/list/whitelist = list()
 		world.log << dbcon_old.ErrorMsg()
 		return 0
 	else
+		alien_whitelist = list()
 		while(query.NextRow())
 			var/list/row = query.GetRowData()
 			if(alien_whitelist[row["ckey"]])

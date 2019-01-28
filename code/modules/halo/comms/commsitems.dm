@@ -4,12 +4,20 @@
 	desc = "A reinforced backpack filled with an array of wires and communication equipment."
 	icon = 'code/modules/halo/clothing/marine_items.dmi'
 	icon_state = "commsback"
-	icon_override = 'code/modules/halo/clothing/marine.dmi'
 	item_state = "commsback"
 	w_class = ITEM_SIZE_HUGE
 	slot_flags = SLOT_BACK
 	var/list/recieving_frequencies = list(CIV_NAME)
 	var/active = 0
+
+	item_icons = list(
+		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
+		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
+		)
+	item_state_slots = list(
+		slot_l_hand_str = "commsback_l",
+		slot_r_hand_str = "commsback_r",
+		)
 
 /obj/item/device/mobilecomms/commsbackpack/New()
 	..()
@@ -69,7 +77,7 @@
 
 /obj/item/device/mobilecomms/commsbackpack/unsc
 	desc = "A reinforced backpack filled with an array of wires and communication equipment. The insignia of the UNSC is stitched into the back."
-	recieving_frequencies = list(TEAMCOM_NAME,CIV_NAME,EBAND_NAME,FLEETCOM_NAME,SQUADCOM_NAME,SHIPCOM_NAME)
+	recieving_frequencies = list(TEAMCOM_NAME,CIV_NAME,EBAND_NAME,FLEETCOM_NAME,SQUADCOM_NAME,SHIPCOM_NAME,ODST_NAME)
 
 /obj/item/device/mobilecomms/commsbackpack/innie
 	desc = "A reinforced backpack filled with an array of wires and communication equipment. This one appears to have been tampered with."
@@ -92,6 +100,15 @@
 /obj/item/device/mobilecomms/commsbackpack/innie/permanant/set_active()
 	return
 
+/obj/item/device/mobilecomms/commsbackpack/sec
+	recieving_frequencies = list(SEC_NAME,EBAND_NAME)
+
+/obj/item/device/mobilecomms/commsbackpack/sec/permanent
+	active = 1
+
+/obj/item/device/mobilecomms/commsbackpack/sec/permanent/set_active()
+	return
+
 #undef SHIPCOM_NAME
 #undef TEAMCOM_NAME
 #undef SQUADCOM_NAME
@@ -99,3 +116,6 @@
 #undef COV_COMMON_NAME
 #undef EBAND_NAME
 #undef CIV_NAME
+#undef SEC_NAME
+#undef ODST_NAME
+#undef BERTELS_NAME

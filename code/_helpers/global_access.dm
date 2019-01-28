@@ -521,6 +521,8 @@
 			return global.gear_tweak_free_color_choice_;
 		if("gender_datums")
 			return global.gender_datums;
+		if("orion_password")
+			return global.orion_password;
 		if("ghost_darkness_images")
 			return global.ghost_darkness_images;
 		if("ghost_role_manager")
@@ -979,6 +981,8 @@
 			return global.shatter_sound;
 		if("ship_engines")
 			return global.ship_engines;
+		if("shipmap_handler")
+			return global.shipmap_handler;
 		if("shuttle_controller")
 			return global.shuttle_controller;
 		if("side_effects")
@@ -1145,6 +1149,8 @@
 			return global.total_lighting_sources;
 		if("total_unit_tests")
 			return global.total_unit_tests;
+		if("trade_controller")
+			return global.trade_controller;
 		if("traitors")
 			return global.traitors;
 		if("transfer_controller")
@@ -1153,8 +1159,6 @@
 			return global.turbolift_controller;
 		if("turbolifts")
 			return global.turbolifts;
-		if("turfs")
-			return global.turfs;
 		if("turret_icons")
 			return global.turret_icons;
 		if("uniqueness_repository")
@@ -1219,7 +1223,7 @@
 			return global.z_levels;
 		if("zone_blocked")
 			return global.zone_blocked;
-		
+
 /proc/writeglobal(which, newval)
 	switch(which)
 		if("ALL_ANTIGENS")
@@ -1742,6 +1746,8 @@
 			global.gear_tweak_free_color_choice_=newval;
 		if("gender_datums")
 			global.gender_datums=newval;
+		if("orion_password")
+			global.orion_password=newval;
 		if("ghost_darkness_images")
 			global.ghost_darkness_images=newval;
 		if("ghost_role_manager")
@@ -2200,6 +2206,8 @@
 			global.shatter_sound=newval;
 		if("ship_engines")
 			global.ship_engines=newval;
+		if("shipmap_handler")
+			global.shipmap_handler=newval;
 		if("shuttle_controller")
 			global.shuttle_controller=newval;
 		if("side_effects")
@@ -2366,6 +2374,8 @@
 			global.total_lighting_sources=newval;
 		if("total_unit_tests")
 			global.total_unit_tests=newval;
+		if("trade_controller")
+			global.trade_controller=newval;
 		if("traitors")
 			global.traitors=newval;
 		if("transfer_controller")
@@ -2374,8 +2384,6 @@
 			global.turbolift_controller=newval;
 		if("turbolifts")
 			global.turbolifts=newval;
-		if("turfs")
-			global.turfs=newval;
 		if("turret_icons")
 			global.turret_icons=newval;
 		if("uniqueness_repository")
@@ -2440,7 +2448,7 @@
 			global.z_levels=newval;
 		if("zone_blocked")
 			global.zone_blocked=newval;
-		
+
 /var/list/_all_globals=list(
 	"ALL_ANTIGENS",
 	"ANTAG_FREQS",
@@ -2702,6 +2710,7 @@
 	"gear_datums",
 	"gear_tweak_free_color_choice_",
 	"gender_datums",
+	"orion_password",
 	"ghost_darkness_images",
 	"ghost_role_manager",
 	"ghost_sightless_images",
@@ -2931,6 +2940,7 @@
 	"severity_to_string",
 	"shatter_sound",
 	"ship_engines",
+	"shipmap_handler",
 	"shuttle_controller",
 	"side_effects",
 	"skin_styles_female_list",
@@ -3014,11 +3024,11 @@
 	"total_lighting_overlays",
 	"total_lighting_sources",
 	"total_unit_tests",
+	"trade_controller",
 	"traitors",
 	"transfer_controller",
 	"turbolift_controller",
 	"turbolifts",
-	"turfs",
 	"turret_icons",
 	"uniqueness_repository",
 	"universe_has_ended",

@@ -53,7 +53,6 @@
 		/obj/item/seeds/chiliseed = 30,
 		/obj/item/seeds/cocoapodseed = 30,
 		/obj/item/seeds/cornseed = 30,
-		/obj/item/seeds/replicapod = 30,
 		/obj/item/seeds/eggplantseed = 30,
 		/obj/item/seeds/amanitamycelium = 30,
 		/obj/item/seeds/glowshroom = 30,
@@ -82,7 +81,8 @@
 		/obj/item/seeds/towermycelium = 30,
 		/obj/item/seeds/watermelonseed = 30,
 		/obj/item/seeds/wheatseed = 30,
-		/obj/item/seeds/whitebeetseed = 30
+		/obj/item/seeds/whitebeetseed = 30,
+		/obj/item/seeds/tobaccoseed = 30,
 	)
 
 /obj/machinery/seed_storage/xenobotany
@@ -100,7 +100,6 @@
 		/obj/item/seeds/chiliseed = 30,
 		/obj/item/seeds/cocoapodseed = 30,
 		/obj/item/seeds/cornseed = 30,
-		/obj/item/seeds/replicapod = 30,
 		/obj/item/seeds/eggplantseed = 30,
 		/obj/item/seeds/amanitamycelium = 30,
 		/obj/item/seeds/glowshroom = 30,

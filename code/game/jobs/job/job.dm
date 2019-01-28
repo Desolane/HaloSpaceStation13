@@ -6,6 +6,7 @@
 	var/list/minimal_access = list()      // Useful for servers which prefer to only have access given to the places a job absolutely needs (Larger server population)
 	var/list/access = list()              // Useful for servers which either have fewer players, so each person needs to fill more than one role, or servers which like to give more access, so players can't hide forever in their super secure departments (I'm looking at you, chemistry!)
 	var/department_flag = 0
+	var/faction_flag = 0
 	var/total_positions = 0               // How many players can be this job
 	var/spawn_positions = 0               // How many players can spawn in as this job
 	var/current_positions = 0             // How many players have this job
@@ -38,6 +39,11 @@
 	var/track_players = 0
 	var/list/assigned_players = list()
 	var/spawn_faction
+	var/is_whitelisted = 0
+	var/spawnpoint_override = null //If set: This will override player-chosen spawnpoints. Text string of spawnpoint's display name.
+	var/list/blacklisted_species = list()		//job cannot be filled by these species
+	var/list/whitelisted_species = list()		//job can only be filled by these species
+	var/open_slot_on_death = 0
 
 /datum/job/New()
 	..()

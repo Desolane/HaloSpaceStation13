@@ -4,6 +4,7 @@
 	requires_power = 0
 	luminosity = 0
 	has_gravity = 1
+	base_turf = /turf/simulated/floor/asteroid/planet
 
 
 /area/planets/Geminus
@@ -25,14 +26,17 @@
 	icon_state = "blue"
 
 
-/area/planets/Geminus/outdoor/east
-	name = "\improper Geminus City - East"
-	icon_state = "green"
-
 /area/planets/Geminus/outdoor/west
 	name = "\improper Geminus City - West"
 	icon_state = "red"
 
+/area/planets/Geminus/outdoor/level1
+	name = "\improper Geminus City - level 1 exterior"
+	icon_state = "red"
+
+/area/planets/Geminus/outdoor/level2
+	name = "\improper Geminus City - level 2 exterior"
+	icon_state = "red"
 
 /area/planets/Geminus/outdoor/central
 	name = "\improper Geminus City - Central"
@@ -71,25 +75,50 @@
 	name = "\improper Stage"
 	icon_state = "theatre"
 
-/area/planets/Geminus/indoor/shoppingarea
-	name = "\improper Clothes Store"
-	icon_state = "red"
-
-/area/planets/Geminus/indoor/barber
-	name = "\improper Salon and Barber Shop"
-	icon_state = "yellow"
-
-/area/planets/Geminus/indoor/shoppingarea
-	name = "\improper Shopping Area"
-	icon_state = "green"
-
 /area/planets/Geminus/indoor/hotel
 	name = "\improper Hotel"
 	icon_state = "yellow"
 
+/area/planets/Geminus/indoor/gamebar
+	name = "game Bar"
+	icon_state = "yellow"
+
+/area/planets/Geminus/indoor/grocery
+	name = "grocery Store"
+	icon_state = "kitchen"
+
 /area/planets/Geminus/indoor/courtroom
 	name = "\improper Courtroom"
 	icon_state = "courtroom"
+
+/area/planets/Geminus/indoor/living1nw
+	name = "\improper Northwest Appartment Level 1"
+	icon_state = "courtroom"
+
+/area/planets/Geminus/indoor/living1ne
+	name = "\improper Northeast Appartment Level 1"
+	icon_state = "courtroom"
+
+/area/planets/Geminus/indoor/living1sw
+	name = "\improper Southwest Appartment Level 1"
+	icon_state = "courtroom"
+
+/area/planets/Geminus/indoor/living2nw
+	name = "\improper Northwest Appartment Level 2"
+	icon_state = "courtroom"
+
+/area/planets/Geminus/indoor/living2ne
+	name = "\improper Northeast Appartment Level 2"
+	icon_state = "courtroom"
+
+/area/planets/Geminus/indoor/living2sw
+	name = "\improper Southwest Appartment Level 2"
+	icon_state = "courtroom"
+
+/area/planets/Geminus/indoor/labs1
+	name = "\improper Research and development level 1"
+	icon_state = "courtroom"
+
 
 /area/planets/Geminus/indoor/chapel
 	name = "\improper Chapel"
@@ -107,16 +136,16 @@
 	name = "\improper Police Station"
 	icon_state = "brig"
 
-/area/planets/Geminus/indoor/prison
-	name = "\improper Security - Prison Wing"
-	icon_state = "sec_prison"
-
 /area/planets/Geminus/indoor/xenoflora
 	name = "\improper Xenoflora Lab"
 	icon_state = "xeno_f_lab"
 
 /area/planets/Geminus/indoor/city_hall
 	name = "\improper City Hall"
+	icon_state = "dk_yellow"
+
+/area/planets/Geminus/indoor/city_hall1
+	name = "\improper City Hall Level 1"
 	icon_state = "dk_yellow"
 
 /area/planets/Geminus/indoor/mayor
@@ -167,14 +196,6 @@
 	name = "\improper Mine"
 	icon_state = "mining"
 
-/area/planets/Geminus/indoor/cop_office
-	name = "\improper Chief Of Police Office"
-	icon_state = "green"
-
-/area/planets/Geminus/indoor/warden_office
-	name = "\improper Warden Office"
-	icon_state = "green"
-
 /area/planets/Geminus/indoor/armory
 	name = "\improper City Police Armory"
 	icon_state = "yellow"
@@ -183,6 +204,17 @@
 	name = "\improper City Hospital"
 	icon_state = "medbay"
 
+/area/planets/Geminus/indoor/hospital1
+	name = "\improper City Hospital Level 1"
+	icon_state = "medbay"
+
 /area/planets/Geminus/indoor/cmo
 	name = "\improper Chief Medical Officer Office"
 	icon_state = "cmo"
+
+/area/planets/Geminus/outdoor/space_elevator
+	name = "\improper Space Elevator"
+
+//COLONY MAC//
+/area/planets/Geminus/outdoor/MAC
+	name = "\improper Geminus MAC"

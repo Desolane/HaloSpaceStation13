@@ -8,22 +8,40 @@
 
 	density = 1
 
-	bound_height = 64
-	bound_width = 64
+	bound_height = 128
+	bound_width = 128
 
-	pixel_x = -64
-	pixel_y = -64
+	pixel_x = -32
+	pixel_y = -32
 
 	takeoff_overlay_icon_state = "thrust"
 	takeoff_sound = 'code/modules/halo/shuttles/pelican_takeoff.ogg'
 
-	passengers = list(13)
-	gunners = list(1)
-	gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret/pelican_autocannon)
+	comp_prof = /datum/component_profile/pelican
 
-	health = list(300,300) //Actually pretty fragile if you can get past the armor.
-	exposed_positions = list("passengers")//Passengers could technically be hit by bullets through the troop bay.
-	damage_resistances = list("brute" = 70.0, "burn" = 65.0,"emp" = 50.0)//Brute resistance is equal to HMG bullets
+	occupants = list(13,1)
+
+	exposed_positions = list("driver" = 20,"passengers" = 15)//Passengers could technically be hit by bullets through the troop bay.
+
+	vehicle_size = 128
+
+/obj/vehicles/air/pelican/update_object_sprites()
+
+
+//Pelican component profile define//
+/obj/item/vehicle_component/health_manager/pelican
+	integrity = 300
+	resistances = list("brute"=30,"burn"=20,"emp"=50)
+
+/datum/component_profile/pelican
+	gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret/pelican_autocannon)
+	vital_components = newlist(/obj/item/vehicle_component/health_manager/pelican)
+	cargo_capacity = 24
+	max_vehicle_size = 64
+	vehicle_capacity = 32
+
+/obj/vehicles/air/pelican/unsc
+	faction = "unsc"
 
 /obj/item/weapon/gun/vehicle_turret/pelican_autocannon
 	name = "M370 Autocannon"
@@ -48,43 +66,93 @@
 
 	density = 1
 
-	bound_height = 64
-	bound_width = 64
+	bound_height = 128
+	bound_width = 128
 
-	pixel_x = -64
-	pixel_y = -64
+	pixel_x = -32
+	pixel_y = -32
 
 	overmap_range = 1
 
 	takeoff_overlay_icon_state = "thrust"
 	takeoff_sound = 'code/modules/halo/shuttles/pelican_takeoff.ogg'
 
-	passengers = list(13)
-	gunners = list(1)
-	gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret/pelican_autocannon)
+	comp_prof = /datum/component_profile/pelican
 
-	health = list(300,300) //Actually pretty fragile if you can get past the armor.
-	exposed_positions = list("passengers")//Passengers could technically be hit by bullets through the troop bay.
-	damage_resistances = list("brute" = 70.0, "burn" = 65.0,"emp" = 50.0)//Brute resistance is equal to HMG bullets
+	occupants = list(13,1)
+
+	exposed_positions = list("driver" = 20,"passengers" = 15)//Passengers could technically be hit by bullets through the troop bay.
+
+	vehicle_size = 128
 
 /obj/vehicles/air/overmap/pelican/unsc
 	faction = "unsc"
 
-/obj/vehicles/air/pelican/civ
-	desc = "A versatile aircraft used by the UNSC for medium-lift operations of personnel, vehicles and equipment. This one has been disarmed of weapons and has had most of the armor removed."
-	faction = "civillian"
-	passengers = list(6)
+/obj/vehicles/air/overmap/pelican/urf
+	faction = "innie"
 
-	damage_resistances = list("brute" = 50.0, "burn" = 35.0,"emp" = 20.0)//Severely reduced resistances due to being civillian.
+	icon_state = "inni-base"
+	desc = "A versatile aircraft used by the UNSC for medium-lift operations of personnel, vehicles and equipment. This one has a red fist painted onto the armor. A 40mm Chain-Gun is mounted on the nose."
+	faction = "innie"
+	occupants = list(13,1)
+
+	comp_prof = /datum/component_profile/pelican/urf
+
+/obj/vehicles/air/pelican/innie/update_object_sprites()
+	. = ..()
+	overlays += image(icon,"innie_overlay")
+
+/obj/item/vehicle_component/health_manager/pelican/urf
+	resistances = list("brute"=25,"burn"=20,"emp"=35)
+
+/datum/component_profile/pelican/urf
+	gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret/pelican_autocannon_innie)
+	vital_components = newlist(/obj/item/vehicle_component/health_manager/pelican/innie)
+
+/obj/item/weapon/gun/vehicle_turret/pelican_autocannon_innie
+	name = "40mm Chain-Gun"
+
+	icon = 'code/modules/halo/weapons/turrets/turret_items.dmi'
+	icon_state = "chaingun_obj"
+	item_state = "chaingun_obj"
+
+	projectile_fired = /obj/item/projectile/bullet/a762_ap
+
+	fire_delay = 5.5 SECONDS
+
+	burst = 3
+
+
+/obj/vehicles/air/pelican/civ
+	desc = "A civilian pelican lacking in both weapons and armor."
+	faction = "police"
+	occupants = list(6,0)
+
+	comp_prof = /datum/component_profile/pelican/civ
+
+/obj/item/vehicle_component/health_manager/pelican/civ
+	resistances = list("brute"=15,"burn"=10,"emp"=20)
+
+/datum/component_profile/pelican/civ
+	vital_components = newlist(/obj/item/vehicle_component/health_manager/pelican/civ)
 
 /obj/vehicles/air/pelican/innie
 	desc = "A versatile aircraft used by the UNSC for medium-lift operations of personnel, vehicles and equipment. This one has a red fist painted onto the armor. A 40mm Chain-Gun is mounted on the nose."
 	faction = "innie"
-	passengers = list(13)
-	gunners = list(1)
-	gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret/pelican_autocannon_innie)
+	occupants = list(13,1)
 
-	damage_resistances = list("brute" = 60.0, "burn" = 45.0,"emp" = 35.0)//Reduced resistances due to being innie-salvaged.
+	comp_prof = /datum/component_profile/pelican/innie
+
+/obj/vehicles/air/pelican/innie/update_object_sprites()
+	. = ..()
+	overlays += image(icon,"innie_overlay")
+
+/obj/item/vehicle_component/health_manager/pelican/innie
+	resistances = list("brute"=25,"burn"=20,"emp"=35)
+
+/datum/component_profile/pelican/innie
+	gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret/pelican_autocannon_innie)
+	vital_components = newlist(/obj/item/vehicle_component/health_manager/pelican/innie)
 
 /obj/item/weapon/gun/vehicle_turret/pelican_autocannon_innie
 	name = "40mm Chain-Gun"

@@ -22,7 +22,6 @@
 		/obj/item/clothing/shoes/brown,
 		/obj/item/device/radio/headset/heads/captain,
 		/obj/item/clothing/gloves/captain,
-		/obj/item/weapon/gun/energy/gun,
 		/obj/item/clothing/suit/armor/captain,
 		/obj/item/weapon/melee/telebaton,
 		/obj/item/clothing/under/dress/dress_cap,
@@ -91,30 +90,20 @@
 
 /obj/structure/closet/secure_closet/hos/WillContain()
 	return list(
-		new/datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/security, /obj/item/weapon/storage/backpack/satchel_sec)),
 		/obj/item/clothing/head/HoS,
-		/obj/item/clothing/head/helmet/nt,
-		/obj/item/clothing/suit/armor/vest/nt,
 		/obj/item/clothing/suit/storage/vest/nt/hos,
-		/obj/item/clothing/under/rank/head_of_security/jensen,
-		/obj/item/clothing/under/rank/head_of_security/corp,
-		/obj/item/clothing/suit/armor/hos/jensen,
-		/obj/item/clothing/suit/armor/hos,
-		/obj/item/clothing/head/HoS/dermal,
 		/obj/item/weapon/cartridge/hos,
-		/obj/item/device/radio/headset/heads/hos,
 		/obj/item/clothing/glasses/sunglasses/sechud,
 		/obj/item/taperoll/police,
 		/obj/item/weapon/shield/riot,
 		/obj/item/weapon/storage/box/flashbangs,
 		/obj/item/weapon/storage/belt/security,
 		/obj/item/device/flash,
-		/obj/item/weapon/melee/baton/loaded,
-		/obj/item/weapon/gun/energy/gun,
+		/obj/item/weapon/gun/projectile/ma5b_ar,
+		/obj/item/ammo_magazine/m762_ap/MA5B,
 		/obj/item/clothing/accessory/holster/waist,
 		/obj/item/weapon/melee/telebaton,
 		/obj/item/clothing/head/beret/sec/corporate/hos,
-		/obj/item/device/holowarrant
 	)
 
 /obj/structure/closet/secure_closet/warden
@@ -146,7 +135,7 @@
 		/obj/item/weapon/storage/box/teargas,
 		/obj/item/weapon/storage/belt/security,
 		/obj/item/weapon/reagent_containers/spray/pepper,
-		/obj/item/weapon/melee/baton/loaded,
+		/obj/item/weapon/melee/baton/humbler,
 		/obj/item/weapon/gun/energy/gun,
 		/obj/item/weapon/storage/box/holobadge,
 		/obj/item/clothing/head/beret/sec/corporate/warden,
@@ -167,14 +156,14 @@
 	return list(
 		new/datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/security, /obj/item/weapon/storage/backpack/satchel_sec)),
 		new/datum/atom_creator/simple(/obj/item/weapon/storage/backpack/dufflebag/sec, 50),
-		/obj/item/clothing/suit/armor/vest/nt,
+		/obj/item/clothing/suit/storage/vest/solgov/security,
 		/obj/item/clothing/head/helmet,
 		/obj/item/device/radio/headset/headset_sec,
 		/obj/item/weapon/storage/belt/security,
 		/obj/item/device/flash,
 		/obj/item/weapon/reagent_containers/spray/pepper,
 		/obj/item/weapon/grenade/chem_grenade/teargas,
-		/obj/item/weapon/melee/baton/loaded,
+		/obj/item/weapon/melee/baton/humbler,
 		/obj/item/clothing/glasses/sunglasses/sechud,
 		/obj/item/taperoll/police,
 		/obj/item/device/hailer,
@@ -223,22 +212,20 @@
 		/obj/item/clothing/under/det/black,
 		/obj/item/clothing/suit/storage/det_trench,
 		/obj/item/clothing/suit/storage/det_trench/grey,
-		/obj/item/clothing/suit/storage/forensics/blue,
-		/obj/item/clothing/suit/storage/forensics/red,
 		/obj/item/clothing/gloves/thick,
 		/obj/item/clothing/head/det,
 		/obj/item/clothing/head/det/grey,
 		/obj/item/clothing/shoes/laceup,
 		/obj/item/weapon/storage/box/evidence,
 		/obj/item/device/radio/headset/headset_sec,
-		/obj/item/clothing/suit/armor/vest/detective,
-		/obj/item/ammo_magazine/c45m/flash,
+		/obj/item/clothing/suit/storage/vest/nt/warden,
+		/obj/item/ammo_magazine/m127_saphp,
 		/obj/item/taperoll/police,
-		/obj/item/weapon/gun/projectile/colt/detective,
+		/obj/item/weapon/gun/projectile/m6c_magnum_s,
 		/obj/item/clothing/accessory/holster/armpit,
 		/obj/item/weapon/reagent_containers/food/drinks/flask/detflask,
-		/obj/item/weapon/storage/briefcase/crimekit,
-		/obj/item/device/holowarrant
+		/obj/item/device/holowarrant,
+		/obj/item/weapon/storage/backpack/satchel
 	)
 
 /obj/structure/closet/secure_closet/injection
@@ -299,4 +286,30 @@
 		/obj/item/device/camera_film = 2,
 		/obj/item/device/taperecorder = 2,
 		/obj/item/weapon/storage/secure/briefcase = 2,
+	)
+
+/obj/structure/closet/secure_closet/ft
+	name = "forensic scientist's cabinet"
+	req_access = list()
+	icon_state = "cabinetdetective_locked"
+	icon_closed = "cabinetdetective"
+	icon_locked = "cabinetdetective_locked"
+	icon_opened = "cabinetdetective_open"
+	icon_broken = "cabinetdetective_broken"
+	icon_off = "cabinetdetective_broken"
+
+/obj/structure/closet/secure_closet/ft/WillContain()
+	return list(
+		/obj/item/clothing/head/surgery/black,
+		/obj/item/clothing/under/det/black,
+		/obj/item/clothing/suit/storage/forensics/blue,
+		/obj/item/clothing/suit/storage/forensics/red,
+		/obj/item/clothing/gloves/thick,
+		/obj/item/clothing/shoes/laceup,
+		/obj/item/clothing/suit/storage/vest/nt/warden,
+		/obj/item/clothing/shoes/white,
+		/obj/item/weapon/storage/box/evidence,
+		/obj/item/device/radio/headset/headset_sec,
+		/obj/item/taperoll/police,
+		/obj/item/weapon/storage/briefcase/crimekit
 	)

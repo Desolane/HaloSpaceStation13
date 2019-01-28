@@ -1,43 +1,35 @@
 
-/obj/item/weapon/melee/combat_knife
+/obj/item/weapon/material/knife/combat_knife
 	name = "combat knife"
 	desc = "Multipurpose knife for utility use and close quarters combat"
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "Knife"
 	item_state = "butterflyknife_open"
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 	force = 30
 	throwforce = 10
+	sharp = 1
+	edge = 1
 	hitsound = 'sound/weapons/bladeslice.ogg'
-	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
+
+/obj/item/weapon/material/machete
+	name = "machete"
+	desc = "A standard issue machete used for hacking things apart. It is very sharp "
+	icon= 'code/modules/halo/weapons/icons/machete.dmi'
+	icon_state = "machete_obj"
+	item_state = "machete"
+	item_icons = list(
+		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
+		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
+		)
 
 
-/obj/item/weapon/melee/baton/humbler
-	name = "humbler stun device"
-	desc = "A retractable baton capable of inducing a large amount of pain via electrical shocks."
-	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
-	icon_state = "humbler stun device"
-	item_state = "classic_baton"
-	force = 35
-	damtype = PAIN
-	w_class = 2		//smaller while we're folded up
-
-/obj/item/weapon/melee/baton/humbler/New()
-	..()
-	bcell = new/obj/item/weapon/cell/high(src)
-	update_icon()
-	return
-
-/obj/item/weapon/melee/baton/humbler/attack_self(mob/user)
-	if(..())
-		if(status)
-			w_class = 3
-			icon_state = "humbler stun device"
-		else
-			w_class = 2
-			item_state = "classic_baton"
-
-/obj/item/weapon/melee/baton/humbler/deductcharge(var/chrgdeductamt)
-	if(!..())
-		w_class = 2
-		item_state = "classic_baton"
+	w_class = ITEM_SIZE_LARGE
+	force_divisor = 0.6
+	thrown_force_divisor = 0.6
+	slot_flags = SLOT_BELT
+	sharp = 1
+	edge = 1
+	unbreakable = 1
+	attack_verb = list("chopped", "torn", "cut")
+	hitsound = 'sound/weapons/bladeslice.ogg'

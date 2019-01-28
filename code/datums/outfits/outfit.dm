@@ -40,6 +40,7 @@ var/list/outfits_decls_by_type_
 	var/r_hand = null
 	var/l_hand = null
 	var/list/backpack_contents = list() // In the list(path=count,otherpath=count) format
+	var/list/starting_accessories = list()
 
 	var/id_type
 	var/id_desc
@@ -139,14 +140,14 @@ var/list/outfits_decls_by_type_
 	//Start with uniform,suit,backpack for additional slots
 	if(uniform)
 		H.equip_to_slot_or_del(new uniform(H),slot_w_uniform)
+	if(gloves)
+		H.equip_to_slot_or_del(new gloves(H),slot_gloves)
 	if(suit)
 		H.equip_to_slot_or_del(new suit(H),slot_wear_suit)
 	if(back)
 		H.equip_to_slot_or_del(new back(H),slot_back)
 	if(belt)
 		H.equip_to_slot_or_del(new belt(H),slot_belt)
-	if(gloves)
-		H.equip_to_slot_or_del(new gloves(H),slot_gloves)
 	if(shoes)
 		H.equip_to_slot_or_del(new shoes(H),slot_shoes)
 	if(mask)
@@ -167,6 +168,11 @@ var/list/outfits_decls_by_type_
 		H.equip_to_slot_or_del(new r_pocket(H),slot_r_store)
 	if(suit_store)
 		H.equip_to_slot_or_del(new suit_store(H),slot_s_store)
+	if(starting_accessories && H.w_uniform)
+		for(var/T in starting_accessories)
+			var/obj/item/clothing/accessory/acc = new T(src)
+			var/obj/item/clothing/uniform = H.w_uniform
+			uniform.attach_accessory(null, acc)
 
 	if(l_hand)
 		H.put_in_l_hand(new l_hand(H))

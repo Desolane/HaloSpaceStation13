@@ -71,8 +71,8 @@
 	siemens_coefficient = 0.9
 
 /obj/item/clothing/under/rank/guard
-	desc = "A durable uniform worn by NanoTrasen corporate security."
-	name = "\improper NanoTrasen security uniform"
+	desc = "A durable uniform worn by Misriah Armory corporate security."
+	name = "\improper Misriah Armory security uniform"
 	icon_state = "ntguard"
 	item_state = "r_suit"
 	worn_state = "ntguard"
@@ -145,8 +145,8 @@
 	worn_state = "hos_corporate"
 
 /obj/item/clothing/head/HoS
-	name = "Head of Security Hat"
-	desc = "The hat of the Head of Security. For showing the officers who's in charge."
+	name = "Chief of Police Hat"
+	desc = "The hat of the Chief of Police. For showing the officers who's in charge."
 	icon_state = "hoscap"
 	body_parts_covered = 0
 	siemens_coefficient = 0.8

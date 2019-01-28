@@ -14,7 +14,7 @@ var/jobban_keylist[0]		//to store the keys & ranks
 	jobban_savebanfile()
 
 //returns a reason if M is banned from rank, returns 0 otherwise
-/proc/jobban_isbanned(mob/M, rank)
+/proc/jobban_isbanned(mob/M, rank,whitelist_check = 0, var/datum/job/job)
 	if(M && rank)
 		/*
 		if(_jobban_isbanned(M, rank)) return "Reason Unspecified"	//for old jobban
@@ -23,8 +23,17 @@ var/jobban_keylist[0]		//to store the keys & ranks
 		if (guest_jobbans(rank))
 			if(config.guest_jobban && IsGuestKey(M.key))
 				return "Guest Job-ban"
-			if(config.usewhitelist && !check_whitelist(M))
-				return "Whitelisted Job"
+
+		if(job && job.faction_whitelist && !whitelist_lookup(job.faction_whitelist, M))
+			//skip admins
+			var/admin_skip = 0
+			if(M.client && M.client:holder && M.client:holder:rights & R_ADMIN)
+				admin_skip = 1
+			if(!admin_skip)
+				return "[job.faction_whitelist] ONLY"
+
+		if(whitelist_check && !check_whitelist(M,rank))
+			return "Whitelisted Job"
 
 		for (var/s in jobban_keylist)
 			if( findtext(s,"[M.ckey] - [rank]") == 1 )
@@ -33,7 +42,7 @@ var/jobban_keylist[0]		//to store the keys & ranks
 					var/text = copytext(s, startpos, 0)
 					if(text)
 						return text
-				return "Reason Unspecified"
+				return "Ban Reason Unspecified"
 	return 0
 
 /*

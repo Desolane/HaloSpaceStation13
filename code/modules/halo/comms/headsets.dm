@@ -1,6 +1,7 @@
 
 //default civilian headset
 /obj/item/device/radio/headset
+	ks2type = /obj/item/device/encryptionkey/eband
 
 //insurrectionist headset
 /obj/item/device/radio/headset/insurrection
@@ -18,6 +19,12 @@
 /obj/item/device/radio/headset/unsc/marine
 	ks2type = /obj/item/device/encryptionkey/teamcom
 
+/obj/item/device/radio/headset/unsc/odst
+	ks2type = /obj/item/device/encryptionkey/taccom
+
+/obj/item/device/radio/headset/unsc/odsto
+	ks2type = /obj/item/device/encryptionkey/taccomo
+
 //unsc officer headset
 /obj/item/device/radio/headset/unsc/officer
 	ks2type = /obj/item/device/encryptionkey/officercom
@@ -25,3 +32,8 @@
 //unsc senior officer headset
 /obj/item/device/radio/headset/unsc/commander
 	ks2type = /obj/item/device/encryptionkey/fleetcom
+
+//police headset
+/obj/item/device/radio/headset/police
+	ks2type = /obj/item/device/encryptionkey/police
+	icon_state = "sec_headset"

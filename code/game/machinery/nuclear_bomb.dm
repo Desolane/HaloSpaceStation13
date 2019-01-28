@@ -1,5 +1,23 @@
 var/bomb_set
 
+//Code to pick a random pass-phrase for Project Orion
+var/global/orion_password = null
+/proc/get_orion_password()
+	if (orion_password)
+		return orion_password
+
+	var/name = ""
+
+	name += pick("Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Gamma", "Zulu")
+	name += "-" + pick("Hotel", "India", "Juliet", "Kilo", "Lima", "Mike", "November", "Yankee")
+	name += "-" + pick("Oscar", "Papa", "Romeo", "Sierra", "Tango", "Uniform", "Victor", "Whiskey", "Xray")
+	name += "-" + pick("1","2","3","4","5","6","7","8","9","0")
+	name += pick("1","2","3","4","5","6","7","8","9","0")
+	name += pick("1","2","3","4","5","6","7","8","9","0")
+	orion_password = name
+
+	return name
+
 /obj/machinery/nuclearbomb
 	name = "\improper Nuclear Fission Explosive"
 	desc = "Uh oh. RUN!!!!"
@@ -440,3 +458,109 @@ var/bomb_set
 				continue
 			T.icon_state = target_icon_state
 		last_turf_state = target_icon_state
+
+/obj/item/weapon/folder/envelope/nuke_instructions
+	name = "instructions envelope"
+	desc = "A small envelope. The label reads 'open only in event of high emergency'."
+
+/obj/item/weapon/folder/envelope/nuke_instructions/Initialize()
+	. = ..()
+	var/obj/item/weapon/paper/R = new(src)
+	R.set_content("<center><img src=sollogo.png><br><br>\
+	<b>CLASSIFICATION: TOP SECRET<br>Debrief on activation of United Nations Space Command Emergency Priority Order 098831A-1</b></center><br><br>\
+	In the event of an alien boarding party, this document will guide you through the activation of the vessel's \
+	on-board nuclear self destruct system. Please read carefully.<br><br>\
+	1) Order the enlisted men to secure the terminal, evacuate the Officers.<br>\
+	2) Notify your Executive officer about the Emergency Priority Order.<br>\
+	3) Proceed to the self-destruct chamber with your Executive Officer, located on Deck Three by the medbay.<br>\
+	4) Open the shutters and enter the chamber.<br>\
+	5) You and your Executive Officer should stand in front of each Keycard Authentication Device. On the KAD interface, select \
+	Activate Protocol 098831A1. Then swipe your ID cards simultaneously.<br>\
+	6) The KAD will now display the Authentication Code. Memorize this code.<br>\
+	7) Insert the authentication disk into the self-destruct terminal.<br>\
+	8) Enter the code into the self-destruct terminal.<br>\
+	9) Authentication procedures are now complete.<br>\
+	10) Enter the desired countdown time.<br>\
+	11) When ready, disable the safety switch.<br>\
+	12) Start the countdown.<br><br>\
+	This concludes the instructions.")
+
+	//stamp the paper
+	var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
+	stampoverlay.icon_state = "paper_stamp-hos"
+	R.stamped += /obj/item/weapon/stamp
+	R.overlays += stampoverlay
+	R.stamps += "<HR><i>This paper has been stamped as 'Top Secret'.</i>"
+
+/obj/item/weapon/folder/nt/rd
+
+/obj/item/weapon/folder/envelope/project_orion
+	name= "Top-Secret"
+	desc = "A thick envelope. The UNSC logo is stamped in the corner, along with 'TOP-SECRET-ORION'."
+//Project Orion Envelope for researchers
+/obj/item/weapon/folder/envelope/project_orion/Initialize()
+	. = ..()
+	var/obj/item/weapon/paper/projectorion = new(src)
+	projectorion.set_content("<tt><center><b><font color='red'>CONFIDENTIAL: RESEARCHERS ONLY</font></b>\
+	<h3>Office of Naval Intelligence</h3>\
+	<img src = ntlogo.png>\
+	</center>\
+	<b>FROM:</b> I.N.G. <br>\
+	<b>TO:</b> Research Director of Exo-Research Outpost<br>\
+	<b>SUBJECT:</b>Project Orion<br>\
+	<hr>\
+	We have determined to institute Project Orion and attempt to create genetically modified supersoldiers to aid in UNSC operations.<br>\
+	Seeing as how your research station is relatively remote and little to nothing happens there we have decided it best you spearhead this project at this current time. This may change at a later date however.<br><br>\
+	Due to the nature of Project Orion, you will be required to requisition volunteers from stationed infantry forces in the system, or if necessary, 'borrow' a specimen you deem to be capable from a nearby colony as a test subject for the augmentation process. We advise you only pick subjects with a military background who are especially gifted or talented in the use of a wide range of weaponry, and are capable and willing to follow orders. The confidentialy of this Project is paramount to your continued employment, and life expectancy within the ONI research division.<br><br>\
+	We have placed the required surgical assets into the surgery rooms located east of the Weapons Testing Lab. We feel these items will be sufficient as the final product will be considered a living weapon and is likely to be a highly lethal and decisive utlility on the battlefield.<br>\
+	The required armor and equipment have been stored inside of the weapons testing lab in the corresponding lockers.<br><br>\
+	We are expecting great results from this project as it's successful implementation will immensely bolster our military assets on the ground, when you are done reading this document be sure to burn it in order to eliminate any trace of this project's paper trail. You have full authority to destroy the Project Orion Laboratory should it be discovered, as well as any assets attached to Project Orion.<br><br>\
+	If you are successful in enabling Project Orion then you will be tasked with procedurally testing Project Orion in live military operations at your descretion.<br><br>\
+	You will have limited authority to request transport for Project Orion utilizing local military vessels in the system via the following clearance phrase.<br><br>\
+	'[get_orion_password()]'<br><br>\
+	Any high command aboard local military vessels within the sector should be directed towards documents kept in their personal quarters or abord their bridge to verify this code and should allow Project Orion limited use of their facilites and armory during active operations.<br><br>\
+	If the Project Orion subject is designate as AWOL, Unstable, Unusable, or a threat to UNSC or ONI personel you are granted the authority to initate a man hunt or, if needed, order the execution of the Project Orion Specimen. In these cases all Project Orion assets should be reclaimed if possible, or destroyed on-site ASAP.<br><br>\
+	Do not disappoint us.<br><br><br>\
+	<i>I.N.G.</i></tt>")
+
+	//stamp the paper
+	var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
+	stampoverlay.icon_state = "paper_stamp-hos"
+	projectorion.stamped += /obj/item/weapon/stamp
+	projectorion.overlays += stampoverlay
+	projectorion.stamps += "<HR><i>This paper has been stamped as 'Top Secret'.</i>"
+
+
+	//Project Orion Envelope for Naval High Command
+/obj/item/weapon/folder/envelope/orion_code
+	name= "Top-Secret - Orion Code"
+	desc = "A thick envelope. The UNSC logo is stamped in the corner, along with 'TOP-SECRET'."
+
+/obj/item/weapon/folder/envelope/orion_code/Initialize()
+	. = ..()
+	var/obj/item/weapon/paper/orioncode = new(src)
+	orioncode.set_content("<tt><center><b><font color='red'>CONFIDENTIAL: Naval High Command ONLY</font></b>\
+	<h3>Office of Naval Intelligence</h3>\
+	<img src = ntlogo.png>\
+	</center>\
+	<b>FROM:</b> I.N.G. <br>\
+	<b>TO:</b> Bridge Command<br>\
+	<b>SUBJECT:</b>Orion Code<br>\
+	We have tasked our Exo-Research station with a special project the details of which are only revealed on a need-to-know basis. This document exists solely to inform you of the following pass-phrase.<br><br>\
+	'[get_orion_password()]'<br><br>\
+	When you are given this phrase by a certified member of the Exo-Research outpost you are to comply with their requests to a reasonable level of accountability. Any persons or equipment which may be transferred to your vessel after the reception of this pass-phrase are <font color='red'> NOT </font>to be considered under your command or in any way under your jurisdiction or a part of your vessels property.<br><br>\
+	The lead scientist who has provided this pass-phrase will advise you on what to do should extenuating circumstances arise, and if any equipment or remains are required to be secured or destroyed by military personnel under your command.<br><br><br>\
+	Do not disappoint us.<br><br><br>\
+	<i>I.N.G.</i></tt>")
+
+	//stamp the paper
+	var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
+	stampoverlay.icon_state = "paper_stamp-hos"
+	orioncode.stamped += /obj/item/weapon/stamp
+	orioncode.overlays += stampoverlay
+	orioncode.stamps += "<HR><i>This paper has been stamped as 'Top Secret'.</i>"
+
+//Gives the blank envelope a place to exist.
+/obj/item/weapon/folder/envelope/blanks
+	name= "Blank Envelope"
+	desc = "A thick envelope."

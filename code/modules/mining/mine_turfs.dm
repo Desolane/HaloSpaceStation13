@@ -1,5 +1,5 @@
-var/list/mining_walls = list()
-var/list/mining_floors = list()
+var/global/list/mining_walls = list()
+var/global/list/mining_floors = list()
 
 /**********************Mineral deposits**************************/
 /turf/unsimulated/mineral
@@ -37,11 +37,17 @@ var/list/mining_floors = list()
 	has_resources = 1
 
 /turf/simulated/mineral/New()
+	icon_state = "rock"
 	mining_walls += src
-	spawn(0)
-		MineralSpread()
-	spawn(2)
-		update_icon(1)
+	. = ..()
+
+/turf/simulated/mineral/Initialize()
+	. = INITIALIZE_HINT_LATELOAD
+	..()
+
+/turf/simulated/mineral/LateInitialize()
+	MineralSpread()
+	update_icon(1)
 
 /turf/simulated/mineral/Destroy()
 	mining_walls -= src
@@ -388,19 +394,21 @@ var/list/mining_floors = list()
 				for(var/i=0, i<quantity, i++)
 					new /obj/item/weapon/material/shard/phoron(src)
 
-			if(7)
-				var/obj/item/stack/material/uranium/R = new(src)
-				R.amount = rand(5,25)
+			//if(7)
+				//var/obj/item/stack/material/uranium/R = new(src)
+				//R.amount = rand(5,25)
 
 /turf/simulated/mineral/random
 	name = "Mineral deposit"
-	var/mineralSpawnChanceList = list("Uranium" = 5, "Platinum" = 5, "Iron" = 35, "Carbon" = 35, "Diamond" = 1, "Gold" = 5, "Silver" = 5, "Phoron" = 10)
-	var/mineralChance = 100 //10 //means 10% chance of this plot changing to a mineral deposit
+	icon_state = "rock_mineral"
+	var/mineralSpawnChanceList = list("Uranium" = 1, "Platinum" = 5, "Iron" = 35, "Carbon" = 35, "Diamond" = 1, "Gold" = 5, "Silver" = 5)
+	var/mineralChance = 10 //means 10% chance of this plot changing to a mineral deposit
 
 /turf/simulated/mineral/random/New()
 	if (prob(mineralChance) && !mineral)
 		var/mineral_name = pickweight(mineralSpawnChanceList) //temp mineral name
 		mineral_name = lowertext(mineral_name)
+		ensure_ore_data_initialised()
 		if (mineral_name && (mineral_name in ore_data))
 			mineral = ore_data[mineral_name]
 			UpdateMineral()
@@ -408,8 +416,9 @@ var/list/mining_floors = list()
 	. = ..()
 
 /turf/simulated/mineral/random/high_chance
-	mineralChance = 100 //25
-	mineralSpawnChanceList = list("Uranium" = 10, "Platinum" = 10, "Iron" = 20, "Carbon" = 20, "Diamond" = 2, "Gold" = 10, "Silver" = 10, "Phoron" = 20)
+	icon_state = "rock_mineral_high"
+	mineralChance = 25
+	mineralSpawnChanceList = list("Uranium" = 1, "Platinum" = 10, "Iron" = 60, "Carbon" = 20, "Diamond" = 2, "Gold" = 10, "Silver" = 10, "mhydrogen" = 1)
 
 
 /**********************Asteroid**************************/

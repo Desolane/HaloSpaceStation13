@@ -15,12 +15,26 @@
 	fire_sound = 'code/modules/halo/sounds/MagnumShotSoundEffect.ogg'
 	reload_sound = 'code/modules/halo/sounds/MagnumReloadSoundEffect.ogg'
 	load_method = MAGAZINE
+	w_class = ITEM_SIZE_NORMAL
+
+	item_icons = list(
+		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
+		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
+		)
 
 /obj/item/weapon/gun/projectile/m6d_magnum/update_icon()
 	if(ammo_magazine)
 		icon_state = "magnum"
 	else
 		icon_state = "magnum_unloaded"
+	. = ..()
+
+/obj/item/weapon/gun/projectile/m6d_magnum/verb/scope()
+	set category = "Weapon"
+	set name = "Use Scope (Sidearm)"
+	set popup_menu = 1
+
+	toggle_scope(usr, 1.1)
 
 //Magnum M6S silenced pistol
 
@@ -39,8 +53,16 @@
 	silenced = 1
 	screen_shake = 0
 
+/obj/item/weapon/gun/projectile/m6c_magnum_s/verb/scope()
+	set category = "Weapon"
+	set name = "Use Scope (Sidearm)"
+	set popup_menu = 1
+
+	toggle_scope(usr, 1.1)
+
 /obj/item/weapon/gun/projectile/m6c_magnum_s/update_icon()
 	if(ammo_magazine)
 		icon_state = "SOCOM"
 	else
 		icon_state = "SOCOM_unloaded"
+	. = ..()
